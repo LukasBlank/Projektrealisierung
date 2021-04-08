@@ -8,8 +8,7 @@
 export default {
   methods: {
     addWartung() {
-      this.$store.commit('addWartung')
-      console.log(this.$store.state.wartungen)
+      this.$store.commit('addWartung', 'added Wartung')
     },
   },
 }

@@ -1,7 +1,10 @@
 <template>
   <v-app>
     <v-app-bar app color="primary" dark>
-      <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon
+        v-if="initialized"
+        @click="drawer = true"
+      ></v-app-bar-nav-icon>
       <v-toolbar-title>Projekt Sokrates</v-toolbar-title>
     </v-app-bar>
     <v-navigation-drawer v-model="drawer" absolute temporary>
@@ -29,21 +32,34 @@
       </v-list>
     </v-navigation-drawer>
     <v-main>
-      <router-view />
+      <router-view v-if="initialized" />
+      <Ladebildschirm v-if="!initialized" />
     </v-main>
   </v-app>
 </template>
 
 <script>
+import Ladebildschirm from './components/Ladebildschirm'
 export default {
   name: 'App',
+  components: {
+    Ladebildschirm,
+  },
   data: () => ({
     drawer: false,
   }),
+  computed: {
+    initialized() {
+      return this.$store.state.initialized
+    },
+  },
   methods: {
     to(routename) {
       if (this.$route.path != routename) this.$router.push(routename)
     },
+  },
+  created() {
+    this.$store.dispatch('init')
   },
 }
 </script>
