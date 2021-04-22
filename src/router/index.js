@@ -12,14 +12,19 @@ const routes = [
   },
   {
     path: '/wartung',
-    name: 'Wartung',
+    name: '/wartung',
     component: () => import("../components/Wartung.vue")
   },
   {
     path: '/stoerung',
-    name: 'Stoerung',
+    name: '/stoerung',
     component: () => import("../components/Stoerung.vue")
   },
+  {
+    path: '/stoerungdetails/:id',
+    name: 'StoerungDetails',
+    component: () => import("../components/StoerungDetails.vue")
+  }
 ]
 
 const router = new VueRouter({

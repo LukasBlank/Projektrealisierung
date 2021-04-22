@@ -11,6 +11,14 @@ const store = new Vuex.Store({
         stoerungen: null,
         stammdaten: null
     },
+    getters: {
+        getEquipment: (state) => (id) => {
+            return state.stammdaten.equipment.find(e => e.id==id)
+        },
+        getProblem: (state) => (id) => {
+            return state.stammdaten.problem.find(p => p.id==id)
+        }
+    },
     mutations:{
         addWartung(state, payload){
             state.wartungen.push(payload)
@@ -24,9 +32,12 @@ const store = new Vuex.Store({
     },
     actions:{
         async init({commit})  {
+            // Testen ob Daten offline schon zur Verfügung stehen
+            // persistens-store
             try{
                 const res = await axios.
                     get("https://0ab0d57e-5e7a-4e87-9d74-6cf2e16589e5.mock.pstmn.io/data")
+                console.log(res.data)
                 commit("init", res.data)
             }catch(err){
                 // Erweiteres Fehlerhandling hier einfügen

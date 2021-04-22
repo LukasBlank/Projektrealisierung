@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app style="caret-color: transparent">
     <v-app-bar app color="primary" dark>
       <v-app-bar-nav-icon
         v-if="initialized"
@@ -16,14 +16,14 @@
           <v-list-item-title>Startseite</v-list-item-title>
         </v-list-item>
 
-        <v-list-item @click="to('Wartung')">
+        <v-list-item @click="to('/wartung')">
           <v-list-item-icon>
             <v-icon>mdi-cogs</v-icon>
           </v-list-item-icon>
           <v-list-item-title>Wartung</v-list-item-title>
         </v-list-item>
 
-        <v-list-item @click="to('Stoerung')">
+        <v-list-item @click="to('/stoerung')">
           <v-list-item-icon>
             <v-icon>mdi-alert-circle-outline</v-icon>
           </v-list-item-icon>
@@ -55,7 +55,7 @@ export default {
   },
   methods: {
     to(routename) {
-      if (this.$route.path != routename) this.$router.push(routename)
+      if (this.$route.path != routename) this.$router.push({ path: routename })
     },
   },
   created() {
