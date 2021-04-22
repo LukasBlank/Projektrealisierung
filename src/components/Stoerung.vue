@@ -45,7 +45,6 @@ export default {
       stoerung.e = this.$store.getters.getEquipment(stoerung.e_id)
       stoerung.p = this.$store.getters.getProblem(stoerung.p_id)
     })
-    console.log(this.stoerungen)
   },
 }
 </script>

@@ -15,9 +15,30 @@ const store = new Vuex.Store({
         getEquipment: (state) => (id) => {
             return state.stammdaten.equipment.find(e => e.id==id)
         },
+        getBuilding: (state) => (id) => {
+            return state.stammdaten.building.find(b => b.id==id)
+        },
+        getCompany: (state) => (id) => {
+            return state.stammdaten.company.find(c => c.id==id)
+        },
         getProblem: (state) => (id) => {
             return state.stammdaten.problem.find(p => p.id==id)
-        }
+        },
+        getStoerung: (state) => (id) => {
+            return state.stoerungen.find(s => s.id==id)
+        },
+        getCompanies(state){
+            return state.stammdaten.company
+        },
+        getBuildings: (state) => (c_id) => {
+            return state.stammdaten.building.filter(b => b["comp-id"]==c_id)
+        },
+        getEquipments: (state) => (b_id) => {
+            return state.stammdaten.equipment.filter(e => e.build_id==b_id)
+        },
+        getProblems(state){
+            return state.stammdaten.problem
+        },
     },
     mutations:{
         addWartung(state, payload){
