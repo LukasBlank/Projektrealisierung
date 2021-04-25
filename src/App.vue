@@ -6,8 +6,17 @@
         @click="drawer = true"
       ></v-app-bar-nav-icon>
       <v-toolbar-title>Projekt Sokrates</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <vue-online-offline @online="isOnline" @offline="isOffline">
+        <div slot="online">
+          <v-icon>mdi-wifi</v-icon>
+        </div>
+        <div slot="offline">
+          <v-icon>mdi-wifi-alert</v-icon>
+        </div>
+      </vue-online-offline>
     </v-app-bar>
-    <v-navigation-drawer v-model="drawer" absolute temporary>
+    <v-navigation-drawer v-model="drawer" fixed temporary>
       <v-list nav dense>
         <v-list-item @click="to('/')">
           <v-list-item-icon>
@@ -33,17 +42,22 @@
     </v-navigation-drawer>
     <v-main>
       <router-view v-if="initialized" />
-      <Ladebildschirm v-if="!initialized" />
+      <Ladebildschirm v-if="!initialized && !error" />
+      <Fehlerbildschirm v-if="error" />
     </v-main>
   </v-app>
 </template>
 
 <script>
 import Ladebildschirm from './components/Ladebildschirm'
+import Fehlerbildschirm from './components/Fehlerbildschirm'
+import VueOnlineOffline from 'vue-online-offline'
 export default {
   name: 'App',
   components: {
     Ladebildschirm,
+    Fehlerbildschirm,
+    VueOnlineOffline,
   },
   data: () => ({
     drawer: false,
@@ -52,10 +66,19 @@ export default {
     initialized() {
       return this.$store.state.initialized
     },
+    error() {
+      return this.$store.state.error
+    },
   },
   methods: {
     to(routename) {
       if (this.$route.path != routename) this.$router.push({ path: routename })
+    },
+    isOnline() {
+      console.log('I am online')
+    },
+    isOffline() {
+      console.log('I am offline')
     },
   },
   created() {

@@ -3,7 +3,11 @@
     <v-list style="padding: 0px">
       <!-- Name -->
       <v-list-item style="padding-top: 10px" id="name">
-        <v-text-field label="Name" v-model="stoerung.name"></v-text-field>
+        <v-text-field
+          label="Name"
+          v-model="stoerung.name"
+          :rules="[required]"
+        ></v-text-field>
       </v-list-item>
       <v-divider></v-divider>
       <!-- Company -->
@@ -52,7 +56,7 @@
           item-text="categorie"
           item-value="id"
           return-object
-          v-model="stoerung.p"
+          v-model="problem"
         ></v-select>
       </v-list-item>
       <v-divider></v-divider>
@@ -66,11 +70,71 @@
         ></v-textarea>
       </v-list-item>
       <v-divider></v-divider>
+      <!-- Uhrzeit -->
+      <v-list-item
+        style="padding-top: 10px; display: flex; justify-content: space-evenly"
+        id="time"
+      >
+        <v-dialog
+          ref="dialog"
+          v-model="timedia"
+          :return-value.sync="time"
+          persistent
+          fullscreen
+          style="display: flex; align-items: center; margin-right: 10px"
+        >
+          <template v-slot:activator="{ on, attrs }">
+            <v-text-field
+              v-model="time"
+              label="Störungsbeginn"
+              readonly
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </template>
+          <v-time-picker format="24hr" v-if="timedia" v-model="time">
+            <v-spacer></v-spacer>
+            <v-btn text color="primary" @click="timedia = false">
+              Cancel
+            </v-btn>
+            <v-btn text color="primary" @click="$refs.dialog.save(time)">
+              OK
+            </v-btn>
+          </v-time-picker>
+        </v-dialog>
+        <v-dialog
+          ref="dialog2"
+          v-model="datedia"
+          :return-value.sync="date"
+          persistent
+          fullscreen
+        >
+          <template v-slot:activator="{ on, attrs }">
+            <v-text-field
+              v-model="date"
+              label="Datum"
+              readonly
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </template>
+          <v-date-picker v-model="date" scrollable>
+            <v-spacer></v-spacer>
+            <v-btn text color="primary" @click="datedia = false">
+              Cancel
+            </v-btn>
+            <v-btn text color="primary" @click="$refs.dialog2.save(date)">
+              OK
+            </v-btn>
+          </v-date-picker>
+        </v-dialog>
+      </v-list-item>
+      <v-divider></v-divider>
       <v-list-item
         style="padding: 10px 0px; display: flex; justify-content: center"
         id="submit"
       >
-        <v-btn @click="log">Speichern</v-btn>
+        <v-btn @click="save">Speichern</v-btn>
       </v-list-item>
     </v-list>
   </div>
@@ -85,11 +149,17 @@ export default {
       building: null,
       equipment: null,
       problems: this.$store.getters.getProblems,
+      problem: null,
+      timedia: false,
+      datedia: false,
+      date: null,
+      time: null,
+      required: (value) => !!value || 'Required.',
     }
   },
   computed: {
     buildings() {
-      return this.$store.getters.getBuildings(this.comp.id)
+      return this.comp ? this.$store.getters.getBuildings(this.comp.id) : []
     },
     equipments() {
       return this.building
@@ -98,11 +168,25 @@ export default {
     },
   },
   methods: {
-    log() {
-      console.log(this.stoerung)
+    save() {
+      if (this.stoerung.name != '') {
+        const payload = {
+          id: this.stoerung.id,
+          name: this.stoerung.name,
+          beschreibung: this.stoerung.beschreibung,
+          time: this.time,
+          date: this.date,
+          p_id: this.problem ? this.problem.id : null,
+          e_id: this.equipment ? this.equipment.id : null,
+          b_id: this.building ? this.building.id : null,
+          c_id: this.comp ? this.comp.id : null,
+        }
+
+        this.$store.commit('saveStörung', payload)
+      }
     },
     onCompChanged() {
-      if (this.building && this.comp.id != this.building['comp-id']) {
+      if (this.building && this.comp.id != this.building.comp_id) {
         this.building = null
         this.equipment = null
       }
@@ -113,13 +197,20 @@ export default {
     },
   },
   created() {
-    this.stoerung.e = this.$store.getters.getEquipment(this.stoerung.e_id)
-    this.stoerung.b = this.$store.getters.getBuilding(this.stoerung.e.build_id)
-    this.stoerung.c = this.$store.getters.getCompany(this.stoerung.b['comp-id'])
-    this.comp = this.stoerung.c
-    this.building = this.stoerung.b
-    this.equipment = this.stoerung.e
-    this.stoerung.p = this.$store.getters.getProblem(this.stoerung.p_id)
+    if (this.stoerung) {
+      this.equipment = this.$store.getters.getEquipment(this.stoerung.e_id)
+      this.building = this.$store.getters.getBuilding(this.stoerung.b_id)
+      this.comp = this.$store.getters.getCompany(this.stoerung.c_id)
+      this.time = this.stoerung.time
+      this.date = this.stoerung.date
+      this.problem = this.$store.getters.getProblem(this.stoerung.p_id)
+    } else {
+      this.stoerung = {
+        id: 'new',
+        name: '',
+        beschreibung: '',
+      }
+    }
   },
 }
 </script>

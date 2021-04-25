@@ -7,12 +7,9 @@
             <v-list-item-title v-text="stoerung.name"></v-list-item-title>
             <v-list-item-subtitle
               v-text="
-                'Equipment ' +
-                  stoerung.e.name +
-                  ': ' +
-                  stoerung.p.categorie +
+                (stoerung.e != null ? 'Equipment ' + stoerung.e.name : '') +
                   ' ' +
-                  stoerung.p.problem
+                  (stoerung.p != null ? stoerung.p.categorie : '')
               "
             ></v-list-item-subtitle>
           </v-list-item-content>
@@ -20,7 +17,16 @@
         <v-divider></v-divider>
       </div>
     </v-list>
-    <v-btn class="mx-2" fab dark color="primary" fixed bottom right>
+    <v-btn
+      class="mx-2"
+      fab
+      dark
+      color="primary"
+      fixed
+      bottom
+      right
+      @click="createStoerung"
+    >
       <v-icon dark>
         mdi-plus
       </v-icon>
@@ -31,12 +37,15 @@
 export default {
   data() {
     return {
-      stoerungen: this.$store.state.stoerungen,
+      stoerungen: this.$store.state.stoerungen.map((s) => s),
     }
   },
   methods: {
     navTo(stoerung) {
       this.$router.push('/stoerungdetails/' + stoerung.id)
+    },
+    createStoerung() {
+      this.$router.push('/stoerungdetails/new')
     },
   },
   created() {
