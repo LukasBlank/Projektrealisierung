@@ -24,6 +24,11 @@ const routes = [
     path: '/stoerungdetails/:id',
     name: 'StoerungDetails',
     component: () => import("../components/StoerungDetails.vue")
+  },
+  {
+    path: '/wartungdetails/:id',
+    name: 'WartunggDetails',
+    component: () => import("../components/WartungDetails.vue")
   }
 ]
 
