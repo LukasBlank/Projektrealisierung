@@ -5,6 +5,7 @@
 ## Benutzung
 In diesem Kapitel wird erklärt, wie die Applikation aufgebaut ist und welche Funktionalitäten gegeben sind.
 #### Startseite
-![Startseite](/images/image.png)
+<img style="float: right;" src="images/image.png">
+Hier kommt text hin
 
 ## Details
