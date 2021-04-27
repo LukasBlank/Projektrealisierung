@@ -1,5 +1,5 @@
 # Benutzerhandbuch
-1. [Aufbau und Benutzung der App](#Aufbau und Benutzung der App)
+1. [Aufbau und Benutzung der App](#aufbau-und-benutzung-der-app)
 2. [Example2](#example2)
 3. [Third Example](#third-example)
 4. [Fourth Example](#fourth-examplehttpwwwfourthexamplecom)
