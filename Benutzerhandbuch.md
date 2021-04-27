@@ -1,11 +1,10 @@
 # Benutzerhandbuch
-1. [Funktionen](#funktionen)
+1. [Benutzung](#benutzung)
 2. [Details](#details)
 3. [Performance](#performance)
 4. [Technologie](#technologie)
 
-
-## Funktionen
+## Benutzung
+In diesen Kapitel wird ausführlichst erklärt, wie 
 ## Details
 ## Performance
-## Technologie
