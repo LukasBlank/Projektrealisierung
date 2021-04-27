@@ -4,7 +4,7 @@
 
 ## Benutzung
 In diesem Kapitel wird erklärt, wie die Applikation aufgebaut ist und welche Funktionalitäten gegeben sind.
-#### Start
+#### Startseite
 
 
 ## Details
