@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
-// import createPersistedState from "vuex-persistedstate"
+import createPersistedState from "vuex-persistedstate"
 
 Vue.use(Vuex);
 
@@ -12,7 +12,6 @@ const store = new Vuex.Store({
         wartungen: null,
         stoerungen: null,
         stammdaten: null,
-        starttime: null
     },
     getters: {
         getEquipment: (state) => (id) => {
@@ -87,22 +86,15 @@ const store = new Vuex.Store({
             state.initialized = false
             state.error = null
         },
-        startTimer(state){
-            state.starttime = new Date()
-        }
     },
     actions:{
         async init({state, commit})  {
             if(!state.initialized){
                 try{
-                    commit("startTimer")
                     const res = await axios.
                         get("https://0ab0d57e-5e7a-4e87-9d74-6cf2e16589e5.mock.pstmn.io/data")
-                    res.data.stoerungen = Array.from({length: 10}, () => res.data.stoerungen[0])
-                    console.log(res.data)
                     commit("init", res.data)
                 }catch(err){
-                    // Erweiteres Fehlerhandling hier einfügen
                     commit("setError")
                     console.log(err)
                 }
@@ -110,7 +102,7 @@ const store = new Vuex.Store({
             
         }
     },
-    // plugins: [createPersistedState()]
+    plugins: [createPersistedState()]
 })
 
 export default store;
