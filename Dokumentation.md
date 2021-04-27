@@ -23,6 +23,7 @@
 
 ### Geplant
 - React Native Frontend (Cross-Plattform Application)
+- Postman
 
 ### Umgesetzt
 - Vue.js (PWA / Progressive Web App)
@@ -36,6 +37,10 @@ Um die Performance und Kapazität der Applikation zu bestimmen wurden die erlang
 Hauptaufwand beim handhaben dieser großen Datensätze ist ganz eindeutig das rendern der Frontend-Elemente der Liste. Um diesen großen Rechenaufwand zu vermindern, gibt es zwei Möglichkeiten:
 - Prefiltering der Störungen durch Angaben von Namen / ID oder anderen Key-Eigenschaften
 - Lazy-Loading ( Laden von nur den Elementen, welche zum aktuellen Zeitpunkt auch im Frontend angezeigt werden)
+
+Weitere Verbesserungsvorschläge:
+- Eingabeüberprüfungen
+- schönere UI
 
 ## Selbsteinschätzung
 Note: 42/50 <br>
