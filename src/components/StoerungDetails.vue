@@ -136,6 +136,13 @@
       >
         <v-btn @click="save">Speichern</v-btn>
       </v-list-item>
+      <!-- back -->
+      <v-list-item
+        style="padding: 10px 0px; display: flex; justify-content: center"
+        id="submit"
+      >
+        <v-btn @click="back">Zurück</v-btn>
+      </v-list-item>
     </v-list>
   </div>
 </template>
@@ -195,6 +202,9 @@ export default {
       if (this.equipment && this.building.id != this.equipment.build_id)
         this.equipment = null
     },
+    back() {
+        this.$router.push('/stoerung')
+    }
   },
   created() {
     if (this.stoerung) {

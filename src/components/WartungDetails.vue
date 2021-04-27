@@ -151,6 +151,13 @@
                 <v-btn @click="submit" :disabled="isfinished">Wartung abschließen</v-btn>
             </v-list-item>
             <v-divider></v-divider>
+            <!-- back -->
+            <v-list-item
+                style="padding: 10px 0px; display: flex; justify-content: center"
+                id="submit"
+            >
+                <v-btn @click="back">Zurück</v-btn>
+            </v-list-item>
             <!-- test
             <v-list-item
                 style="padding: 10px 0px; display: flex; justify-content: center"
@@ -193,6 +200,9 @@ export default {
             this.$router.push('/wartung')
         }
     },
+    back() {
+        this.$router.push('/wartung')
+    }
   },
   created() {
       this.equipment = this.$store.getters.getEquipment(this.wartung.equipment_id)
