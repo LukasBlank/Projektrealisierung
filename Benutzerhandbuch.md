@@ -25,7 +25,28 @@ Unten rechts in der Ecke befindet sich ein zusätzlicher Button, welcher das Anl
 #### Störungsdetails
 ![Details](images/Details.png)<br>
 Auf dieser Seite können Sie alle Details zur ausgewählten Störung ansehen und bearbeiten. Im Abschnitt zu den [Details](#details) werden die Einzelnen Attribute noch einmal detailiert erläutert.
+#### Fehler
+![Fehler](images/error.png)<br>
+Wenn Sie auf dieser Seite gelandet sind kann dies zwei Ursachen haben:
+- Keine Internetverbindung und keine lokalen Daten gefunden
+- Die Api ist nicht erreichbar und es wurden keine lokalen Daten gefunden
 
-
-
+Wenn Sie sichergestellt haben, dass das Problem behoben wurde, dann können Sie über den Button `Erneut versuchen` den Ladevorgang wiederholen.
 ## Details
+Auf den Detail-Seiten der Wartung / Störung können Sie Angaben zu tätigen. Um zu erläutern, welches Feld wie ausgefüllt werden sollte wird im Folgenden erklärt, was für einen Hintergrund welches Feld mit sich bringt. Änderungen werden erst übernommen, wenn final der Speichern-Button geklickt wird, ansonsten werden getroffene Änderungen beim Verlassen der Seite wieder verworfen.
+#### Name
+Der Name der Störung. Dieser wird ebenfalls in der Liste aller Störungen präsentiert, daher ist es zu empfehlen einen sprechenden, aber auch präzisen Name zu wählen.
+Der Name muss nicht eindeutig sein, da intern eine ID zum identifizieren der Störungen verwendet wird. Bei dem Namen handelt es sich um das einzige Pflichtfeld.
+#### Firma
+Die Firma, welche durch die entdeckte Störung betroffen wird. Bei diesem Feld werden die Auswahlmöglichkeiten vorgegeben.
+#### Gebäude
+Kann nur ausgewählt werden, wenn eine Firma ausgewählt wurde. Auch hier werden die Antwortmöglichkeiten vorgegeben, jedoch werden diese vorher noch nach Firma gefiltert, sodass nur Gebäude der ausgewählten Firma angezeigt werden.
+#### Ausrüstung
+Folgt dem selben Prinzip wie die Gebäude. Firma und Gebäude müssen ausgewählt sein und die Antwortmöglichkeiten werden vorgefiltert.
+#### Problemtyp
+Hier kann eine Angabe getroffen werden, um was für eine Art Problem es sich handelt. Anhand dieser Information können Störungen besser auf Techniker verteilt werden.
+#### Beschreibung
+Hier wird die Möglichkeiten geboten weitere Informationen zur Störung bereitzustellen.
+#### Beginn und Datum
+Durch Klick auf die Eingabefelder werden Dialoge geöffnet, welche die Auswahl von Zeit / Datum ermöglichen. Es handelt sich hierbei um die Angabe der Zeit, zu welcher die Störung erkannt worden ist.
+
