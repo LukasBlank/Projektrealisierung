@@ -7,7 +7,7 @@
       ></v-app-bar-nav-icon>
       <v-toolbar-title>Projekt Sokrates</v-toolbar-title>
       <v-spacer></v-spacer>
-      <vue-online-offline @online="isOnline" @offline="isOffline">
+      <vue-online-offline>
         <div slot="online">
           <v-icon>mdi-wifi</v-icon>
         </div>
@@ -37,6 +37,13 @@
             <v-icon>mdi-alert-circle-outline</v-icon>
           </v-list-item-icon>
           <v-list-item-title>Störung</v-list-item-title>
+        </v-list-item>
+
+        <v-list-item @click="to('/performance')">
+          <v-list-item-icon>
+            <v-icon>mdi-home</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title>Performance</v-list-item-title>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
@@ -73,12 +80,6 @@ export default {
   methods: {
     to(routename) {
       if (this.$route.path != routename) this.$router.push({ path: routename })
-    },
-    isOnline() {
-      console.log('I am online')
-    },
-    isOffline() {
-      console.log('I am offline')
     },
   },
   created() {

@@ -55,5 +55,14 @@ export default {
       stoerung.p = this.$store.getters.getProblem(stoerung.p_id)
     })
   },
+  mounted() {
+    this.$nextTick(function() {
+      // Code that will run only after the
+      // entire view has been rendered
+      const seconds =
+        new Date().getTime() - this.$store.state.starttime.getTime()
+      console.log(seconds)
+    })
+  },
 }
 </script>

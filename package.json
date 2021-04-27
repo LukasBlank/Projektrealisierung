@@ -12,6 +12,7 @@
     "core-js": "^3.6.5",
     "register-service-worker": "^1.7.1",
     "vue": "^2.6.11",
+    "vue-apexcharts": "^1.6.1",
     "vue-online-offline": "^1.1.0",
     "vue-router": "^3.5.1",
     "vuetify": "^2.4.0",
