@@ -5,6 +5,6 @@
 ## Benutzung
 In diesem Kapitel wird erklärt, wie die Applikation aufgebaut ist und welche Funktionalitäten gegeben sind.
 #### Startseite
-
+![Startseite](/images/image.png)
 
 ## Details
