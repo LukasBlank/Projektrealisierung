@@ -1,4 +1,4 @@
-# pwa
+# Sokrates
 
 ## Project setup
 ```
@@ -22,3 +22,15 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+<br>
+
+## Benutzerhandbuch
+
+Das Benutzerhandbuch finden Sie [hier](./Benutzerhandbuch.md':include')
+
+<br>
+
+## Dokumentation
+
+Die Dokumentation finden Sie [hier](./Dokumentation.md':include')

@@ -1,8 +1,32 @@
-1. [Technologie](#technologie)
-2. [Performance](#performance)
-3. [Selbsteinschätzung](#selbsteinschätzung)
+1. [Anforderungen](#anforderungen)
+2. [Technologie](#technologie)
+3. [Performance](#performance)
+4. [Selbsteinschätzung](#selbsteinschätzung)
+
+## Anforderungen
+
+### Fachlich
+- Herunterladen: Stammdaten und Transaktionsdaten
+- Erfassung / Upload: Status, Stammdaten, Zeiten, Materialien
+- Kollaboration: Wissensdatenbanken, Abstimmung mit anderen Technikern
+- Innovativ: Augmented Reality, Gamification, …
+- Beindruckend
+
+### Technisch
+- Lauffähig unter Windows 10, iOS und Android
+- Formfaktor: Tablet und Smartphone
+- Offline
+- Synchronisation im Hintergrund
+- Screen Response und UX
 
 ## Technologie
+
+### Geplant
+- React Native Frontend (Cross-Plattform Application)
+
+### Umgesetzt
+- Vue.js (PWA / Progressive Web App)
+- Postman
 
 ## Performance
 ![Performance](images/perf.png)<br>

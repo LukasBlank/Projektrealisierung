@@ -50,12 +50,19 @@
             <v-divider></v-divider>
             <!-- Defects -->
             <v-list-item style="padding-top: 10px" id="defects">
+                <v-checkbox
+                    v-model="nodefects"
+                    :label="`keine Schäden`"
+                    :disabled="isfinished"
+                ></v-checkbox>
+            </v-list-item>
+            <v-list-item style="padding-top: 10px" id="defects">
                 <v-textarea
                     label="Schäden"
                     auto-grow
                     rows="1"
                     v-model="wartung.defects"
-                    :disabled="isfinished"
+                    :disabled="isfinished || nodefects"
                 ></v-textarea>
             </v-list-item>
             <v-divider></v-divider>
@@ -177,12 +184,13 @@ export default {
         //daten: "null"
         menu1: false,
         menu2: false,
-        isfinished: false
+        isfinished: false,
+        nodefects: false,
     }
   },
   methods: {
     submit() {
-        if (this.wartung.defects != "" && this.wartung.time[0] != "" && this.wartung.time[1] != "") {
+        if ((this.wartung.defects != "" || this.nodefects) && this.wartung.time[0] != "" && this.wartung.time[1] != "") {
             const payload = {
                 id: this.wartung.id,
                 name: this.wartung.name,
@@ -210,6 +218,9 @@ export default {
       this.company = this.$store.getters.getCompany(this.building.comp_id)
       if (this.wartung.finished == 1){
           this.isfinished = true
+      }
+      if (this.wartung.finished == 1 && this.wartung.defects == "") {
+          this.nodefects = true
       }
   }
 }
