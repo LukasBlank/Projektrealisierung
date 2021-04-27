@@ -30,6 +30,9 @@ const store = new Vuex.Store({
         getStoerung: (state) => (id) => {
             return state.stoerungen.find(s => s.id==id)
         },
+        getWartung: (state) => (id) => {
+            return state.wartungen.find(w => w.id==id)
+        },
         getCompanies(state){
             return state.stammdaten.company
         },
@@ -66,6 +69,14 @@ const store = new Vuex.Store({
                     for(let key in s){
                         s[key] = payload[key]
                     }
+                }
+            }
+        },
+        saveWartung(state, payload){
+            var w = state.wartungen.find(w => w.id == payload.id)
+            if(w){
+                for(let key in w){
+                    w[key] = payload[key]
                 }
             }
         },

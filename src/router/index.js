@@ -28,7 +28,11 @@ const routes = [
   {
     path: '/performance',
     name: '/performance',
-    component: () => import("../components/Performance.vue")
+    component: () => import("../components/Performance.vue") },
+    {
+    path: '/wartungdetails/:id',
+    name: 'WartunggDetails',
+    component: () => import("../components/WartungDetails.vue")
   }
 ]
 
