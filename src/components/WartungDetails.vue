@@ -50,40 +50,97 @@
             <v-divider></v-divider>
             <!-- Defects -->
             <v-list-item style="padding-top: 10px" id="defects">
-                <v-col
-                    cols="12"
-                >
-                    <v-textarea
-                        name="input-7-1"
-                        label="Schäden"
-                        v-model="wartung.defects"
-                    ></v-textarea>
-                </v-col>
+                <v-textarea
+                    label="Schäden"
+                    auto-grow
+                    rows="1"
+                    v-model="wartung.defects"
+                    :disabled="isfinished"
+                ></v-textarea>
+            </v-list-item>
+            <v-divider></v-divider>
+            <!-- time -->
+            <v-list-item
+                style="padding-top: 10px; display: flex; justify-content: space-evenly"
+                id="time"
+            >
+                <v-row>
+                    <v-col>
+                        <v-menu
+                            ref="menu1"
+                            v-model="menu1"
+                            :close-on-content-click="false"
+                            :nudge-right="40"
+                            :return-value.sync="wartung.time[0]"
+                            transition="scale-transition"
+                            offset-y
+                            max-width="290px"
+                            min-width="290px"
+                        >
+                            <template v-slot:activator="{ on, attrs }">
+                            <v-text-field
+                                v-model="wartung.time[0]"
+                                label="Begin Wartung"
+                                prepend-icon="mdi-clock-time-four-outline"
+                                readonly
+                                v-bind="attrs"
+                                v-on="on"
+                                :disabled="isfinished"
+                            ></v-text-field>
+                            </template>
+                            <v-time-picker
+                                format="24hr"
+                                v-if="menu1"
+                                v-model="wartung.time[0]"
+                                full-width
+                                @click:minute="$refs.menu1.save(wartung.time[0])"
+                            ></v-time-picker>
+                        </v-menu>
+                    </v-col>
+                    <v-col>
+                        <v-menu
+                            ref="menu2"
+                            v-model="menu2"
+                            :close-on-content-click="false"
+                            :nudge-right="40"
+                            :return-value.sync="wartung.time[1]"
+                            transition="scale-transition"
+                            offset-y
+                            max-width="290px"
+                            min-width="290px"
+                        >
+                            <template v-slot:activator="{ on, attrs }">
+                            <v-text-field
+                                v-model="wartung.time[1]"
+                                label="Ende Wartung"
+                                prepend-icon="mdi-clock-time-four-outline"
+                                readonly
+                                v-bind="attrs"
+                                v-on="on"
+                                :disabled="isfinished"
+                            ></v-text-field>
+                            </template>
+                            <v-time-picker
+                                format="24hr"
+                                v-if="menu2"
+                                v-model="wartung.time[1]"
+                                full-width
+                                @click:minute="$refs.menu2.save(wartung.time[1])"
+                            ></v-time-picker>
+                        </v-menu>
+                    </v-col>
+                </v-row>
             </v-list-item>
             <v-divider></v-divider>
             <!-- Comments -->
             <v-list-item style="padding-top: 10px" id="comments">
-                <v-col
-                    cols="12"
-                >
-                    <v-textarea
-                        name="input-7-1"
-                        label="Kommentare"
-                        v-model="wartung.comments"
-                    ></v-textarea>
-                </v-col>
-            </v-list-item>
-            <v-divider></v-divider>
-            <!-- timer -->
-            <v-list-item 
-                style="padding: 10px 0px; justify-content: center"
-                id="time">
-                <div>
-                    <h3>Zeiterfassung</h3>
-                    <p>{{formattedElapsedTime}}</p>
-                    <v-btn @click="start" :disabled="isRunning">Start</v-btn>
-                    <v-btn @click="stop" :disabled="!isRunning">Stop</v-btn>
-                </div>
+                <v-textarea
+                    label="Kommentare"
+                    auto-grow
+                    rows="1"
+                    v-model="wartung.comments"
+                    :disabled="isfinished"
+                ></v-textarea>
             </v-list-item>
             <v-divider></v-divider>
             <!-- submit -->
@@ -91,7 +148,7 @@
                 style="padding: 10px 0px; display: flex; justify-content: center"
                 id="submit"
             >
-                <v-btn @click="save">Wartung abschließen</v-btn>
+                <v-btn @click="submit" :disabled="isfinished">Wartung abschließen</v-btn>
             </v-list-item>
             <v-divider></v-divider>
             <!-- test
@@ -110,55 +167,40 @@ export default {
   data() {
     return{
         wartung: this.$store.getters.getWartung(this.$route.params.id),
-        isRunning: false,
-        elapsedTime: null,
-        timer: undefined,
         //daten: "null"
-
+        menu1: false,
+        menu2: false,
+        isfinished: false
     }
   },
   methods: {
-    start() {
-      this.timer = setInterval(() => {
-        this.elapsedTime += 1000;
-      }, 1000);
-      this.isRunning = true;
-    },
-    stop() {
-      clearInterval(this.timer);
-      this.isRunning = false;
-    },
-    reset() {
-      this.elapsedTime = 0;
-    },
-    save() {
-        const payload = {
-            id: this.wartung.id,
-            name: this.wartung.name,
-            equipment_id: this.wartung.equipment_id,
-            description: this.wartung.description,
-            date: this.wartung.date,
-            time: this.elapsedTime / 1000,
-            defects: this.wartung.defects,
-            comments: this.wartung.comments,
-            finished: 1,
+    submit() {
+        if (this.wartung.defects != "" && this.wartung.time[0] != "" && this.wartung.time[1] != "") {
+            const payload = {
+                id: this.wartung.id,
+                name: this.wartung.name,
+                equipment_id: this.wartung.equipment_id,
+                description: this.wartung.description,
+                date: this.wartung.date,
+                time: this.wartung.time,
+                defects: this.wartung.defects,
+                comments: this.wartung.comments,
+                finished: 1,
+            }
+            //this.daten = payload
+            this.$store.commit('saveWartung', payload)
+            this.isfinished = true
+            this.$router.push('/wartung')
         }
-        //this.daten = payload
-        this.$store.commit('saveWartung', payload)
     },
-  },
-  computed: {
-    formattedElapsedTime() {
-      const date = new Date(null);
-      date.setSeconds(this.elapsedTime / 1000);
-      const utc = date.toUTCString();
-      return utc.substr(utc.indexOf(":") - 2, 8);
-    }
   },
   created() {
       this.equipment = this.$store.getters.getEquipment(this.wartung.equipment_id)
       this.building = this.$store.getters.getBuilding(this.equipment.build_id)
       this.company = this.$store.getters.getCompany(this.building.comp_id)
+      if (this.wartung.finished == 1){
+          this.isfinished = true
+      }
   }
 }
 </script>
