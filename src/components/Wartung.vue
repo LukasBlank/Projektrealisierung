@@ -1,27 +1,34 @@
 <template>
   <div>
+    <v-switch
+      v-model="finished"
+      :label="'Anzeige der Historie'"
+      style="align: center"
+    ></v-switch>
     <v-list style="padding: 0px" three-line>
       <div v-for="(wartung, id) in wartungen" :key="id">
-        <v-list-item @click="navTo(wartung)">
-          <v-list-item-content>
-            <v-list-item-title v-text="wartung.name"></v-list-item-title>
-            <v-list-item-subtitle class="text--primary"
-              v-text="
-                'Unternehmen: ' +
-                  wartung.c.name +
-                  ',  Equipment: ' +
-                  wartung.e.name
-              "
-            ></v-list-item-subtitle>
-            <v-list-item-subtitle
-              v-text="
-                  'Beschreibung: ' +
-                  wartung.description
-              "
-            ></v-list-item-subtitle>
-          </v-list-item-content>
-        </v-list-item>
-        <v-divider></v-divider>
+        <div v-if="wartung.finished == finished">
+          <v-list-item @click="navTo(wartung)">
+            <v-list-item-content>
+              <v-list-item-title v-text="wartung.name"></v-list-item-title>
+              <v-list-item-subtitle class="text--primary"
+                v-text="
+                  'Unternehmen: ' +
+                    wartung.c.name +
+                    ',  Equipment: ' +
+                    wartung.e.name
+                "
+              ></v-list-item-subtitle>
+              <v-list-item-subtitle
+                v-text="
+                    'Beschreibung: ' +
+                    wartung.description
+                "
+              ></v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+          <v-divider></v-divider>
+        </div>
       </div>
     </v-list>
   </div>
@@ -31,6 +38,7 @@ export default {
   data() {
     return{
       wartungen: this.$store.state.wartungen,
+      finished: false,
     }
   },
   methods: {
