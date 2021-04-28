@@ -26,11 +26,11 @@ Unten rechts in der Ecke befindet sich ein zusätzlicher Button, welcher das Anl
 ![Details](images/Details.png)<br>
 Auf dieser Seite können Sie alle Details zur ausgewählten Störung ansehen und bearbeiten. Im Abschnitt zu den [Details](#details) werden die Einzelnen Attribute noch einmal detailiert erläutert.
 ### Wartung
-![Wartungen](images/Wartung1.png)<br>
-![Wartungenhistorie](images/Wartung2.png)<br>
+![Wartungen](images/Wartung1.PNG)<br>
+![Wartungenhistorie](images/Wartung2.PNG)<br>
 Auf dieser Seite können alle persönlichen Wartungen angezeigt werden. Hierbei besteht auch die Möglichkeit sich die abgeschlossenen Wartungen durch den Switch `Anzeige der Historie` einzusehen, jedoch können diese nicht mehr verändern werden.
 ### Wartungsdetails
-![Wartungsdetails](images/Wartungsdetails.png)<br>
+![Wartungsdetails](images/Wartungsdetails.PNG)<br>
 In den Wartungsdetails besteht die Möglichkeit Schäden, welche bei der Wartung aufgetreten sind zu hinterlegen, den Zeitraum anzugeben und optional Kommentare zu hinterlegen. Die anderen Felder dienen nur der Informationsgebung.
 
 Hierbei sind jedoch die Angabe der Schäden und der Zeitraum Pflichtfelder.
