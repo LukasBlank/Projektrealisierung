@@ -33,7 +33,7 @@ Auf dieser Seite können alle persönlichen Wartungen angezeigt werden. Hierbei 
 ![Wartungsdetails](images/Wartungsdetails.PNG)<br>
 In den Wartungsdetails besteht die Möglichkeit Schäden, welche bei der Wartung aufgetreten sind zu hinterlegen, den Zeitraum anzugeben und optional Kommentare zu hinterlegen. Die anderen Felder dienen nur der Informationsgebung.
 
-Hierbei sind jedoch die Angabe der Schäden und der Zeitraum Pflichtfelder.
+Hierbei sind jedoch die Angabe der Schäden und der Zeitraum Pflichtfelder. <br>
 ![Wartungsabschluss](images/Wartung_abgeschlossen.PNG)<br>
 Bereits abgeschlossene Wartungen können nicht weiter bearbeitet und verändert werden.
 ### Fehler
